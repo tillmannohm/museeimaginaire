@@ -1,0 +1,723 @@
+$(document).ready(function(){
+var selected = "";
+// START
+$("#fc03").click(function() {
+	clicker(this);
+	information("start");
+});
+$("#fc03").hover(function() {
+	$(this).css('cursor','pointer');
+	$("#fc03").attr('src', "images/fch_03.jpg");
+
+}, function() {
+	$("#fc03").attr('src', "images/fc_03.jpg");
+
+});
+
+// 1.1 INPUT + DEFINE DICTIONARY
+	var def_dict = "#fc02, #fc06, #fc07";
+	var def_dict_hover = ["#fc02", "#fc06", "#fc07"];
+				$(def_dict).click(function() {
+					clicker(def_dict);
+					information("To start the research process, the topic of the designated thesis needs to be defined first. To establish a dictionary with relevant terms, the INPUT is split into its key elements. <br><br>Querying the thesaurus.com database for synonyms, the program receives related words for the selected terms, expanding the initial topic.");
+					selected = "def_dict";
+				});
+
+				$(def_dict).hover(function() {
+					$.each(def_dict_hover, function(i, value) {
+						$(value).css('cursor','pointer');
+						$(value).attr('src', "images/fch_"+ value.slice(-2) +".jpg");
+					});
+				}, function() {
+					$.each(def_dict_hover, function(i, value) {
+						$(value).attr('src', "images/fc_"+ value.slice(-2) +".jpg");
+					});
+				});
+
+// 1.2 SEARCH LITERATURE
+  var search_lit = "#fc01, #fc05";
+	var search_lit_hover = ["#fc01", "#fc05"];
+				$(search_lit).click(function() {
+					clicker(search_lit);
+					information("<br>With the gained topic dictionary, the algorithm can now build search queries to receive relevant scientific publications from bibliographic databases. The queries simply combine terms from the topic dictionary with the operator 'AND'.<br><br>For each result, the publication's metadata are saved for the next step.");
+					setTimeout(function(){
+						print("researching bibliographic databases");
+					}, 500);
+					setTimeout(function(){
+						print("query #01: 'artificial intelligence' AND 'contemporary art'");
+					}, 2500);
+					setTimeout(function(){
+						$("#window").fadeIn();
+						browser("images/scholar_01.png");
+						print("collecting results (Google Scholar)...");
+					}, 3500);
+					setTimeout(function(){
+						scroller(500, 0);
+					}, 6000);
+					setTimeout(function(){
+						browserScroll("images/scholar_", ["02","03","04","05"], 1000, 800);
+					}, 8000);
+					setTimeout(function(){
+					success();
+				}, 15500);
+					setTimeout(function(){
+						print("collecting results (crossref.org)...");
+						$("#window").fadeIn();
+						browser("images/crossref_01.png");
+					}, 16000);
+					setTimeout(function(){
+						scroller(500, 0);
+					}, 18000);
+					setTimeout(function(){
+						browserScroll("images/crossref_", ["02","03","04","05"], 1000, 800);
+					}, 19000);
+
+					setTimeout(function(){
+						iterate([
+							"query #02: 'machine intelligence' AND 'contemporary art'",
+							"query #03: 'AI' AND 'contemporary art'",
+							"query #04: 'expert system' AND 'contemporary art'",
+							"query #05: 'intelligent retrieval' AND 'contemporary art'",
+							"query #06: 'knowledge engineering' AND 'contemporary art'",
+							"query #07: 'machine learning' AND 'contemporary art'",
+							"query #08: 'natural language processing' AND 'contemporary art'",
+							"query #09: 'neural network' AND 'contemporary art'",
+							"query #10: 'robotics' AND 'contemporary art'",
+						], "collecting results...", 1000, "researching bibliographic databases done");
+					}, 25000);
+				});
+
+				$(search_lit).hover(function() {
+					$.each(search_lit_hover, function(i, value) {
+						$(value).css('cursor','pointer');
+						$(value).attr('src', "images/fch_"+ value.slice(-2) +".jpg");
+					});
+				}, function() {
+					$.each(search_lit_hover, function(i, value) {
+						$(value).attr('src', "images/fc_"+ value.slice(-2) +".jpg");
+					});
+				});
+
+// 1.3 ACCESS LITERATURE
+  var access_lit = "#fc10, #fc11";
+	var access_lit_hover = ["#fc10", "#fc11"];
+				$(access_lit).click(function() {
+					clicker(access_lit);
+					information("<br>While we are dealing with a legal gray area, regarding copyrights in different countries, the automated process of accessing the PDF files will not be specified at this juncture.<br><br>In some cases, the program seeks help to gain access to publications it cannot acquire and therefore needs human intervention to add these publications manually.<br><br>After converting the collected PDF document into plain text, the content can be analysed in the next step.");
+					setTimeout(function(){
+						print("processing publication 'herath2016engineering'");
+					}, 500);
+					setTimeout(function(){
+						breaker();
+						intent1("@incollection{herath2016engineering,");
+						intent2("title={Engineering the Arts},");
+						intent2("author={Herath, Damith and Kroos, Christian},");
+						intent2("booktitle={Robots and Art},");
+						intent2("author={Herath, Damith and Kroos, Christian},");
+						intent2("pages={3--17},");
+						intent2("year={2016},");
+						intent2("publisher={Springer}");
+						intent1("}");
+						breaker();
+						breaker();
+					}, 2000);
+					setTimeout(function(){
+						print("searching for publication (██████.xyz)...");
+						$("#window").fadeIn();
+						browser("images/access_site.png");
+					}, 3500);
+					setTimeout(function(){
+						scroller(1000, 1100);
+					}, 6000);
+					setTimeout(function(){
+						success();
+					}, 7000);
+					setTimeout(function(){
+						print("accessing publication...");
+						browser("images/blank.jpg");
+					}, 9000);
+					setTimeout(function(){
+						browser("images/publication_pdf.png");
+						success();
+					}, 10500);
+					setTimeout(function(){
+						print("extracting plain text from PDF file...");
+					}, 12000);
+					setTimeout(function(){
+						done();
+						breaker();
+						intent1("text content:");
+						breaker();
+						intent2("'Engineering the Arts Damith Herath and Christian Kroos Abstract This book is a result of chance encounters, random discussions and a colluding collaboration between an engineer, a scientist and an artist. From the onset, the interdisciplinary nature has set us on a colliding course of ideas, expec- tations and interests. While interdisciplinary research is celebrated en masse by funding agencies, government bodies and the academia, researchers who embrace interdisciplinarity live a distinctly strenuous life with little recognition for their efforts that appear to fall into the chasm between the established norms and prac- tices of the constituent disciplines. Here, we [...]'");
+						breaker();
+						breaker();
+					}, 15000);
+					setTimeout(function(){
+						print("processing publication 'herath2016engineering' done");
+						breaker();
+					}, 17000);
+			  });
+
+				$(access_lit).hover(function() {
+					$.each(access_lit_hover, function(i, value) {
+						$(value).css('cursor','pointer');
+						$(value).attr('src', "images/fch_"+ value.slice(-2) +".jpg");
+					});
+				}, function() {
+					$.each(access_lit_hover, function(i, value) {
+						$(value).attr('src', "images/fc_"+ value.slice(-2) +".jpg");
+					});
+				});
+
+// 1.4 EXTRACT ENTITIES
+  var extract_ent = "#fc20, #fc24, #fc15, #fc19";
+	var extract_ent_hover = ["#fc20", "#fc24", "#fc15", "#fc19"];
+				$(extract_ent).click(function() {
+					clicker(extract_ent);
+					information("<br>Using external machine learning models again, entities such as persons and titled concepts are extracted from the publication’s text. Only entities with a valid Wikipedia ID are considered for further processing.<br><br>For example, the entities 'Alan Mathison Turing', 'Alan Turing', 'A. Turing' and – if the context allows it – 'Turing' are therefore all linked to the Wikipedia site with the ID 'Alan_Turing', while the entity 'Turing test' is assigned to the ID 'Turing_test'.<br><br>The algorithm sends requests to the DBpedia database, retrieving information provided by Wikipedia. Thereby, it gains insights whether an entity is a person or not, and if so, requests further information such as birth date and a short description containing their field of work. In this way, the program distinguishes artists from scientist and philosophers.");
+					setTimeout(function(){
+						print("extracting entities from publication (Google Cloud Plattform)...");
+					}, 500);
+					setTimeout(function(){
+						done();
+						$("#window").fadeIn();
+						browser("images/nlp.png");
+					}, 2000);
+					setTimeout(function(){
+						breaker();
+						intent1("entities:");
+						breaker();
+						intent2("[...]");
+						intent2("====================");
+						intent2("name            : Thinking Head");
+						intent2("type            : PERSON");
+						intent2("====================");
+						intent2("name            : Stelarc");
+						intent2("type            : PERSON");
+						intent2("wikipedia_ID    : Stelarc");
+						intent2("====================");
+						intent2("name            : embodiment");
+						intent2("type            : OTHER");
+						intent2("====================");
+						intent2("[...]");
+						breaker();
+						breaker();
+					}, 4000);
+
+					setTimeout(function(){
+						print("comparing entities with topic dictionary...");
+					}, 8000);
+					setTimeout(function(){
+						done();
+						breaker();
+						intent1("relevance score: 0.798148");
+						intent2("-> publication found relevant");
+						breaker();
+						breaker();
+					}, 9500);
+					setTimeout(function(){
+						print("requesting knowledge database (DBpedia)...");
+					}, 11000);
+					setTimeout(function(){
+						browser("images/dbpedia.png");
+					}, 13000);
+					setTimeout(function(){
+						scroller(5000, 0);
+					}, 15500);
+					setTimeout(function(){
+						success();
+					}, 19500);
+					setTimeout(function(){
+						breaker();
+						intent1("retrieved information:");
+						breaker();
+						intent2("[...]");
+						intent2("====================");
+						intent2("type: Person");
+						intent2("label: Stelarc");
+						intent2("birthYear: 1946");
+						intent2("description: Australian artist");
+						intent2("====================");
+						intent2("[...]");
+						breaker();
+					}, 20000);
+
+				});
+
+				$(extract_ent).hover(function() {
+					$.each(extract_ent_hover, function(i, value) {
+						$(value).css('cursor','pointer');
+						$(value).attr('src', "images/fch_"+ value.slice(-2) +".jpg");
+					});
+				}, function() {
+					$.each(extract_ent_hover, function(i, value) {
+						$(value).attr('src', "images/fc_"+ value.slice(-2) +".jpg");
+					});
+				});
+
+
+// SAVE TO CORPUS
+  var save_pubs = "#fc12, #fc16, #fc08";
+	var save_pubs_hover = ["#fc12", "#fc16", "#fc08"];
+				$(save_pubs).click(function() {
+					clicker(save_pubs);
+					information("<br>While single essays and similar discrete works are passed on straight to the corpus, publications with multiple works or chapters are split into their single parts, and are later treated as independent publications. The following evaluation process benefits from this procedure, ensuring a more precise analysis of the content while the algorithm investigates topical coherences in each context.<br><br>In addition to the publication’s content, metadata such as author(s), editor(s), corresponding page numbers, and the year of release are stored to provide correct citations in the final thesis.<br><br>Since the conversion of PDF documents into text files is quite problematic due to varying layouts, paginations, image captions, et cetera, text formatting such as paragraphs cannot be transferred from the original publication adequately. Therefore, the algorithm prepares the text by clustering sentences into new passages. Within a publication, every sentence is continuously grouped with its three neighbor sentences.");
+					setTimeout(function(){
+						print("splitting monographs into chapters...");
+					}, 500);
+					setTimeout(function(){
+						done();
+					}, 1500);
+					setTimeout(function(){
+						print("indexing publications with extracted entities...");
+					}, 3000);
+					setTimeout(function(){
+						done();
+					}, 4000);
+					setTimeout(function(){
+						print("clustering sentences into new text passages...");
+					}, 5000);
+					setTimeout(function(){
+						done();
+					}, 6000);
+					setTimeout(function(){
+						print("saving content and meta data to corpus...");
+					}, 7000);
+					setTimeout(function(){
+						done();
+					}, 8000);
+					setTimeout(function(){
+						breaker();
+						intent1("research results total:");
+						intent2("=======================");
+						intent2("documents: 332");
+						intent2("size(PDF): 360 MB");
+						intent2("size(txt): 15 MB");
+						intent2("=======================");
+						breaker();
+						breaker();
+					}, 8500);
+					setTimeout(function(){
+						print("researching and processing publications done");
+					}, 11000);
+				});
+
+				$(save_pubs).hover(function() {
+					$.each(save_pubs_hover, function(i, value) {
+						$(value).css('cursor','pointer');
+						$(value).attr('src', "images/fch_"+ value.slice(-2) +".jpg");
+					});
+				}, function() {
+					$.each(save_pubs_hover, function(i, value) {
+						$(value).attr('src', "images/fc_"+ value.slice(-2) +".jpg");
+					});
+				});
+
+// -----------------------------------------
+// NETWORK
+  var network = "#fc18";
+	var network_hover = ["#fc18"];
+				$(network).click(function() {
+					clicker(network);
+					information("<br>The purpose of the semantic network is to create a computational knowledge and basic understanding of the proclaimed topic. Later, the program investigates the network to detect topic clusters and therefore find a structure that builds the narrative of the thesis.<br><br>Each entity provides a single node in the semantic network. Their weights (or node size) represent their relevance in the network. The algorithm calculates the weight of each node by counting the publications in which the entity occurs. This results from the assumption, that for example a person mentioned by many different authors must be somehow of importance for the topic. Simply counting the appearances of each entity in the whole corpus would lack precision, as single works may over-represent specific terms or persons, taking into consideration text length, writing style, and other factors that could distort the results.<br><br>To establish a semantic network, the nodes need to be linked to each other in a useful manner. As these connections – referred to as edges – should reflect the context to one another, this step is crucial. It is not sufficient to simply draw edges between each publication’s nodes. These connections would be too broad. Various topics may be discussed in the same text without coherency. However, when specific terms or persons often appear together, especially in the same sentence or paragraph, it is justified to consider them having a strong connection, and therefore contextual meaning.<br><br>The weight of an edge between two nodes is calculated by the frequency of this unique connection, considering the whole corpus. With all nodes and edges, the algorithm can now calculate a semantic network, which might be pictured as the general understanding the program has gained of the proclaimed topic.");
+					setTimeout(function(){
+						print("defining entities as network nodes");
+					}, 500);
+					setTimeout(function(){
+						print("counting frequency of each entity in corpus (-> node weights)...");
+					}, 1500);
+					setTimeout(function(){
+						done();
+					}, 3500);
+					setTimeout(function(){
+						print("finding pairs of entities in same text passages (-> edges)...");
+					}, 6000);
+					setTimeout(function(){
+						done();
+					}, 8000);
+					setTimeout(function(){
+						print("counting frequency of pairs in corpus (-> edge weights)...");
+					}, 10000);
+					setTimeout(function(){
+						done();
+					}, 12000);
+					setTimeout(function(){
+						print("calculating semantic network...");
+					}, 14000);
+					setTimeout(function(){
+						success();
+					}, 16000);
+					setTimeout(function(){
+						breaker();
+						intent1("====================");
+						intent1("unique nodes: 6.061");
+						intent1("unique edges: 39.633");
+						intent1("====================");
+						breaker();
+						breaker();
+					}, 17000);
+					setTimeout(function(){
+						print("visualizing semantic network (Gephi)...");
+					}, 19000);
+					setTimeout(function(){
+						$("#window").fadeIn();
+						browser("images/network.gif");
+					}, 21000);
+					setTimeout(function(){
+						done();
+					}, 26000);
+				});
+
+				$(network).hover(function() {
+					$.each(network_hover, function(i, value) {
+						$(value).css('cursor','pointer');
+						$(value).attr('src', "images/fch_"+ value.slice(-2) +".jpg");
+					});
+				}, function() {
+					$.each(network_hover, function(i, value) {
+						$(value).attr('src', "images/fc_"+ value.slice(-2) +".jpg");
+					});
+				});
+
+
+// CLUSTER
+  var cluster = "#fc17, #fc21";
+	var cluster_hover = ["#fc17", "#fc21"];
+				$(cluster).click(function() {
+					clicker(cluster);
+					information("<br>After the evaluation process, the algorithm derives topical coherences from the computed semantic network and establishes a reasonable structure, which provides the thesis’ table of contents. To investigate the network, it first needs to be cleaned from irrelevant nodes and edges. By reducing the network to its 20 percent most relevant nodes and edges (considering their weights), structures and patterns can be explored more efficiently.<br><br>As the program generates a linear written essay, it needs to build a hierarchical structure from an undirected network that creates a narrative. A chronological order seems to be straightforward and can easily be accomplished by focusing on person nodes and their birth dates. Ignoring concept nodes for now also supports the algorithm in discovering subtopics, as some general concepts have connections to most other nodes (for example 'art', 'creation', technology').<br><br>Within this clean, specified network, clusters can be detected for allocating the thematic map into subtopics. To discover such groups of topical coherences, the program searches for communities of nodes that consist of many strong connections between each other but are rather isolated from other communities.5<br><br>Sorted chronologically by birth date of each cluster’s biggest node, these groups of somehow cohesive nodes provide the framework of the thesis’ chapters. Following this, each person node brings its most important concept nodes (top 20 percent considering edge weights) back into the network. From these enriched clusters – respectively subtopics – lists of keywords can be gathered for further processing.");
+					setTimeout(function(){
+						print("preparing network for cluster analysis");
+						$("#window").fadeIn();
+						browser("images/network_reduce1.gif");
+					}, 500);
+					setTimeout(function(){
+						print("reducing nodes and edges by 80% (least weights)...");
+					}, 2000);
+					setTimeout(function(){
+						done();
+					}, 3500);
+					setTimeout(function(){
+						print("recalculating network...");
+					}, 4000);
+					setTimeout(function(){
+						done();
+					}, 7000);
+					setTimeout(function(){
+						print("hiding concept nodes...");
+					}, 7500);
+					setTimeout(function(){
+						browser("images/network_reduce2.gif");
+					}, 9000);
+					setTimeout(function(){
+						done();
+					}, 9500);
+					setTimeout(function(){
+						print("recalculating network...");
+					}, 10000);
+					setTimeout(function(){
+						done();
+					}, 12500);
+					setTimeout(function(){
+						print("network prepared for cluster analysis");
+					}, 14000);
+					setTimeout(function(){
+						print("resizing network...");
+						browser("images/blank.jpg");
+					}, 15000);
+					setTimeout(function(){
+						done();
+						browser("images/cluster1.png");
+					}, 16000);
+					setTimeout(function(){
+						print("detecting coherent communities (Louvain method)...");
+					}, 17000);
+					setTimeout(function(){
+						success();
+						browser("images/cluster2.png");
+					}, 19000);
+					setTimeout(function(){
+						breaker();
+						intent1("detected clusters: 5");
+						breaker();
+						breaker();
+					}, 19500);
+					setTimeout(function(){
+						print("sorting clusters chronologicalls by birth year (biggest nodes)...");
+					}, 20000);
+					setTimeout(function(){
+						done();
+						browser("images/sort_cluster.gif");
+						breaker();
+						intent1("cluster A:");
+						intent2("====================");
+						intent2("biggest node: Jacques_de_Vaucanson");
+						intent2("birth year: 1709");
+						intent2("====================");
+						breaker();
+					}, 22000);
+					setTimeout(function(){
+						intent1("cluster B:");
+						intent2("====================");
+						intent2("biggest node: Alan_Turing");
+						intent2("birth year: 1912");
+						intent2("====================");
+						breaker();
+					}, 23000);
+					setTimeout(function(){
+						intent1("cluster C:");
+						intent2("====================");
+						intent2("biggest node: Harold_Cohen_(artist)");
+						intent2("birth year: 1928");
+						intent2("====================");
+						breaker();
+					}, 24000);
+					setTimeout(function(){
+						intent1("cluster D:");
+						intent2("====================");
+						intent2("biggest node: Stelarc");
+						intent2("birth year: 1946");
+						intent2("====================");
+						breaker();
+					}, 25000);
+					setTimeout(function(){
+						intent1("cluster E:");
+						intent2("====================");
+						intent2("biggest node: Ken_Rinaldo");
+						intent2("birth year: 1958");
+						intent2("====================");
+						breaker();
+						breaker();
+					}, 26000);
+					setTimeout(function(){
+						print("reconsidering 20% most important concept nodes for cluster B...");
+						browser("images/chapter_recalc.gif");
+					}, 28000);
+					setTimeout(function(){
+						done();
+					}, 32000);
+					setTimeout(function(){
+						print("finding clusters (-> chapters) done");
+					}, 33000);
+
+				});
+
+				$(cluster).hover(function() {
+					$.each(cluster_hover, function(i, value) {
+						$(value).css('cursor','pointer');
+						$(value).attr('src', "images/fch_"+ value.slice(-2) +".jpg");
+					});
+				}, function() {
+					$.each(cluster_hover, function(i, value) {
+						$(value).attr('src', "images/fc_"+ value.slice(-2) +".jpg");
+					});
+				});
+
+});
+var i;
+var txt;
+var speed;
+
+function type() {
+i = 0;
+txt = "'artificial intelligence in contemporary art'";
+speed = 150;
+typeWriter();
+};
+
+function typeWriter() {
+  if (i < txt.length) {
+    document.getElementById("typer").innerHTML += txt.charAt(i);
+    i++;
+    setTimeout(typeWriter, speed);
+  }
+};
+
+function clicker(ids) {
+	$(ids).hide();
+	information("")
+	$("#window").fadeOut();
+	$(".alg").not(ids).show();
+	$('#command').html("");
+	var highestTimeoutId = setTimeout(";");
+  for (var i = 0 ; i < highestTimeoutId ; i++) {
+    clearTimeout(i);
+}
+};
+
+function print(text) {
+	if ($('p:last').attr('class') == "break"){
+		$('p:last').remove();
+	};
+$('#command').append('<p id="typer" class="arrows">' + text + '</p>');
+breaker();
+};
+
+function success() {
+if ($('p:last').attr('class') != "break"){
+	$('p:last').append(' successful');
+} else {
+	$('p:last').prev().append(' successful');
+}
+};
+
+function done() {
+if ($('p:last').attr('class') != "break"){
+	$('p:last').append(' done');
+} else {
+	$('p:last').prev().append(' done');
+}
+};
+
+function intent1(text) {
+$('#command').append('<p id="typer" class="intent">' + text + '</p>');
+if( ($("#command").innerHeight() > $("#tmn").height())){
+   // your element have overflow
+	 $('#tmn').scrollTop($('#command')[0].scrollHeight);
+}
+else{
+  //your element don't have overflow
+//	$(".terminal").css("flex-direction", "column");
+}
+};
+
+function intent2(text) {
+$('#command').append('<p id="typer" class="intent2">' + text + '</p>');
+if( ($("#command").innerHeight() > $("#tmn").height())){
+   // your element have overflow
+	 $('#tmn').scrollTop($('#command')[0].scrollHeight);
+}
+else{
+  //your element don't have overflow
+//	$(".terminal").css("flex-direction", "column");
+}
+};
+
+function scroller(t, m) {
+	var img = document.getElementById('win');
+	var height = img.clientHeight-m;
+	$('#browser').animate({scrollTop:height}, t);
+};
+
+function breaker() {
+	$('#command').append('<p id="typer" class="break"> </p>');
+	if( ($("#command").innerHeight() > $("#tmn").height())){
+	   // your element have overflow
+		 $('#tmn').scrollTop($('#command')[0].scrollHeight);
+	}
+	else{}
+};
+
+function browser(img) {
+	$('#browser').scrollTop(0);
+	$("#win").attr('src', img);
+};
+
+function browserScroll(name, list, change, scroll) {
+var timeC = 0;
+var timeS = scroll;
+	$.each(list, function(i, value) {
+		setTimeout(function(){
+			browser("images/blank.jpg");
+		}, timeC);
+
+		setTimeout(function(){
+			browser(name + value + ".png");
+		}, timeC + 250);
+		setTimeout(function(){
+			scroller(500, 0);
+		}, timeS);
+		timeC = timeS+scroll;
+		timeS = timeC+scroll;
+});
+setTimeout(function(){
+	$("#window").fadeOut();
+}, timeC);
+};
+
+function iterate(list,phrase,time,endphrase) {
+	var t = 0;
+	$.each(list, function(i, value) {
+	t = t + time;
+	setTimeout(function(){
+		success();
+	}, t-250);
+	setTimeout(function(){
+		print(value);
+	}, t);
+	t = t + 500;
+	setTimeout(function(){
+		print(phrase);
+	}, t);
+});
+setTimeout(function(){
+	success();
+}, t+250);
+setTimeout(function(){
+	print(endphrase);
+	breaker();
+}, t+750);
+};
+
+$("#info").hover(function() {
+	$("#info").css('cursor','pointer');
+});
+
+function information(txt){
+	$('#info').html(txt);
+};
+
+$("#info").click(function() {
+	if(selected == "def_dict"){
+		function def_dict();
+	};
+
+});
+
+function def_dict(){
+	setTimeout(function(){
+		print("define input phrase: ");
+	}, 500);
+
+	setTimeout(function(){
+		type();
+	}, 1000);
+
+	setTimeout(function(){
+		$("#window").fadeIn();
+		$("#win").attr('src', "images/nlu.jpg");
+	}, 10000);
+	setTimeout(function(){
+		print("retrieving keywords (IBM Watson)...");
+	}, 9000);
+	setTimeout(function(){
+		success();
+		breaker();
+		intent1("keywords:");
+		breaker();
+		intent2("text: 'artificial intelligence',");
+		intent2("relevance: 0.971613");
+		breaker();
+		intent2("text: 'contemporary art'");
+		intent2("relevance: 0.919316");
+		breaker();
+		breaker();
+	}, 12000);
+	setTimeout(function(){
+		print("requesting synonyms (thesaurus.com)...");
+	}, 14000);
+	setTimeout(function(){
+		$("#win").attr('src', "images/blank.jpg");
+	}, 15000);
+	setTimeout(function(){
+		$("#win").attr('src', "images/thesaurus.jpg");
+		success();
+		breaker()
+		intent1("synonymous terms for 'artificial intelligence':");
+		breaker()
+		intent2("['machine intelligence', 'AI', 'expert system', 'intelligent retrieval', 'knowledge engineering', 'machine learning', 'natural language processing', 'neural network', 'robotics']");
+		breaker();
+		breaker();
+		print("defining topic dictionary done");
+	}, 17000);
+};
